@@ -3,17 +3,17 @@ package com.gabrielkuhn.user.controller;
 import com.gabrielkuhn.user.entity.User;
 import com.gabrielkuhn.user.service.UserService;
 import com.gabrielkuhn.user.vo.ResponseTemplateVO;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/users")
 @Slf4j
+@RequiredArgsConstructor
 public class UserController {
 
-    @Autowired
-    private UserService userService;
+    private final UserService userService;
 
     @PostMapping
     public User saveUser(@RequestBody User user) {

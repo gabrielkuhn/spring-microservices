@@ -4,20 +4,19 @@ import com.gabrielkuhn.user.entity.User;
 import com.gabrielkuhn.user.repository.UserRepository;
 import com.gabrielkuhn.user.vo.Department;
 import com.gabrielkuhn.user.vo.ResponseTemplateVO;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 @Service
 @Slf4j
+@RequiredArgsConstructor
 public class UserService {
 
-    @Autowired
-    private UserRepository userRepository;
+    private final UserRepository userRepository;
 
-    @Autowired
-    private RestTemplate restTemplate;
+    private final RestTemplate restTemplate;
 
     public User saveUser(User user) {
         log.info("Inside saveUser of UserService");
@@ -25,9 +24,12 @@ public class UserService {
     }
 
     public ResponseTemplateVO getUserWithDepartment(Long userId) {
+        log.info("Inside getUserWithDepartment of UserService");
         ResponseTemplateVO vo = new ResponseTemplateVO();
+
         User user = userRepository.findById(userId).orElseThrow(() -> new RuntimeException("user not found"));
-        Department department = restTemplate.getForObject("http://localhost:9001/departments/" + user.getDepartmentId(),
+
+        Department department = restTemplate.getForObject("http://DEPARTMENT-SERVICE/departments/" + user.getDepartmentId(),
                 Department.class);
 
         vo.setUser(user);
