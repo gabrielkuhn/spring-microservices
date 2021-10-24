@@ -1,4 +1,4 @@
-package com.gabrielkuhn.user.vo;
+package com.gabrielkuhn.user.representation;
 
 import com.gabrielkuhn.user.entity.User;
 import lombok.AllArgsConstructor;
@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class ResponseTemplateVO {
+public class UserResponse {
 
     private User user;
     private Department department;

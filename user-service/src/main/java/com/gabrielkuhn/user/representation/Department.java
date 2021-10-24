@@ -1,4 +1,4 @@
-package com.gabrielkuhn.user.vo;
+package com.gabrielkuhn.user.representation;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -11,5 +11,4 @@ public class Department {
     private Long id;
     private String name;
     private String address;
-    private String code;
 }

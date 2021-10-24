@@ -5,6 +5,9 @@ spring:
   application:
     name: API-GATEWAY
   cloud:
+    config:
+      enabled: true
+      uri: http://localhost:9296
     gateway:
       routes:
         - id: USER-SERVICE
@@ -41,12 +44,3 @@ management:
     web:
       exposure:
         include: hystrix.stream
-
-eureka:
-  client:
-    register-with-eureka: true
-    fetch-registry: true
-    service-url:
-      defaultZone: http://localhost:8761/eureka/
-  instance:
-    hostname: localhost

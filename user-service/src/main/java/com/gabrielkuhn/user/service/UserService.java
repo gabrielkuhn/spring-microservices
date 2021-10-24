@@ -2,8 +2,8 @@ package com.gabrielkuhn.user.service;
 
 import com.gabrielkuhn.user.entity.User;
 import com.gabrielkuhn.user.repository.UserRepository;
-import com.gabrielkuhn.user.vo.Department;
-import com.gabrielkuhn.user.vo.ResponseTemplateVO;
+import com.gabrielkuhn.user.representation.Department;
+import com.gabrielkuhn.user.representation.UserResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -23,18 +23,18 @@ public class UserService {
         return userRepository.save(user);
     }
 
-    public ResponseTemplateVO getUserWithDepartment(Long userId) {
-        log.info("Inside getUserWithDepartment of UserService");
-        ResponseTemplateVO vo = new ResponseTemplateVO();
+    public UserResponse getUser(Long userId) {
+        log.info("Inside getUser of UserService");
+        UserResponse userResponse = new UserResponse();
 
         User user = userRepository.findById(userId).orElseThrow(() -> new RuntimeException("user not found"));
 
         Department department = restTemplate.getForObject("http://DEPARTMENT-SERVICE/departments/" + user.getDepartmentId(),
                 Department.class);
 
-        vo.setUser(user);
-        vo.setDepartment(department);
+        userResponse.setUser(user);
+        userResponse.setDepartment(department);
 
-        return vo;
+        return userResponse;
     }
 }
