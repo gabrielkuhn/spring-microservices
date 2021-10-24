@@ -8,4 +8,5 @@ spring:
     config:
       server:
         git:
-          uri: https://github.com/gabrielkuhn/spring-microservices/config
+          uri: https://github.com/gabrielkuhn/spring-microservices
+          search-paths: config
